@@ -1,0 +1,1 @@
+ActionController::Base.send :include, Metamagic::HelperMethods

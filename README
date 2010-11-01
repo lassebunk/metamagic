@@ -1,0 +1,38 @@
+Metamagic
+=========
+
+Metamagic is a simple Ruby on Rails plugin for creating meta tags.
+
+
+Installation
+============
+
+In Rails 3:
+$ rails plugin install git@github.com:lassebunk/metamagic.git
+
+Example
+=======
+
+In your controller:
+
+  def show
+    @product = Product.find(params[:id])
+    
+    meta :title => @product.name, :description => @product.description
+  end
+  
+In your application.html.erb:
+
+  <head>
+    <title>My Site</title>
+    ...
+    <%= metamagic :title => "My default title", :description => "My default description." %>
+    ...
+  </head
+
+For custom meta tags, just call it like this in your controller:
+  
+  meta :title => "My title", :my_custom_tag => "My custom value"
+
+
+Copyright (c) 2010 Lasse Bunk, released under the MIT license
