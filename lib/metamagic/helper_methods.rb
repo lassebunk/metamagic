@@ -9,6 +9,9 @@ module Metamagic
 
       out = ''
       options.each do |key, value|
+        if value.is_a?(Array)
+          value = value.join(", ")
+        end
         out += tag('meta', :name => key.to_s, :content => value) if value
       end
       
