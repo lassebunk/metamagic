@@ -34,5 +34,9 @@ For custom meta tags, just call it like this in your controller:
   
   meta :title => "My title", :my_custom_tag => "My custom value"
 
+To use in conjunction with the headliner plugin (http://github.com/mokolabs/headliner):
+
+  <%= metamagic :title => @title %>
+
 
 Copyright (c) 2010 Lasse Bunk, released under the MIT license
