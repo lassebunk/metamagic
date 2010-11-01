@@ -9,7 +9,7 @@ module Metamagic
 
       out = ''
       options.each do |key, value|
-        out += tag('meta', :name => key.to_s, :content => value)
+        out += tag('meta', :name => key.to_s, :content => value) if value
       end
       
       out.html_safe
