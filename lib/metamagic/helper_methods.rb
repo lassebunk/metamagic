@@ -1,11 +1,11 @@
 module Metamagic
   module HelperMethods
     def meta(options = {})
-      @metatags = options
+      @meta_tags = options
     end
 
     def metamagic(options = {})
-      options = @metatags || options
+      options = @meta_tags || options
 
       out = ''
       options.each do |key, value|
