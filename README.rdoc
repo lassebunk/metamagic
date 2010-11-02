@@ -1,5 +1,3 @@
-== Metamagic
-
 Metamagic is a simple Ruby on Rails plugin for creating meta tags.
 
 
