@@ -3,9 +3,11 @@ Metamagic is a simple Ruby on Rails plugin for creating meta tags.
 
 == Installation
 
-In Rails 3:
+In your <em>Gemfile</em>:
 
-  $ rails plugin install git://github.com/lassebunk/metamagic.git
+  gem 'metamagic'
+  
+Then run <code>bundle install</code>.
 
 == Example
 

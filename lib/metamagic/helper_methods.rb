@@ -17,9 +17,5 @@ module Metamagic
       
       out.html_safe
     end
-    
-    def self.included(base)
-      base.send :helper_method, :meta, :metamagic
-    end
   end
 end
