@@ -7,7 +7,7 @@ module Metamagic
     def metamagic(options = {})
       options = @meta_tags || options
 
-      out = ''
+      out = []
       options.each do |key, value|
         props = { :name => key.to_s }
         
@@ -26,10 +26,10 @@ module Metamagic
           props[propkey] = propvalue
         end
         
-        out += tag('meta', props) if value
+        out << tag('meta', props) if value
       end
       
-      out.html_safe
+      out.join.html_safe
     end
   end
 end
