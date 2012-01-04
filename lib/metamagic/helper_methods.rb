@@ -9,10 +9,24 @@ module Metamagic
 
       out = ''
       options.each do |key, value|
-        if value.is_a?(Array)
-          value = value.join(", ")
+        props = { :name => key.to_s }
+        
+        if value.is_a?(Hash)
+          props.merge! value
+        else
+          props[:content] = value
         end
-        out += tag('meta', :name => key.to_s, :content => value) if value
+        
+        # loop through each property to find
+        # arrays that need to be joined
+        props.each_pair do |propkey, propvalue|
+          if propvalue.is_a?(Array)
+            propvalue = propvalue.join(", ")
+          end
+          props[propkey] = propvalue
+        end
+        
+        out += tag('meta', props) if value
       end
       
       out.html_safe

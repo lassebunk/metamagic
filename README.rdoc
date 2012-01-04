@@ -31,6 +31,10 @@ In your <code>application.html.erb</code>:
 For custom meta tags, just call it like this in your controller:
   
   meta :title => "My title", :my_custom_tag => "My custom value"
+  
+With custom properties:
+
+  meta :image => { :property => "og:image", :content => "http://mydomain.com/images/my_image.jpg" }
 
 To use in conjunction with the headliner plugin (http://github.com/mokolabs/headliner):
 
