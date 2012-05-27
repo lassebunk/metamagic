@@ -26,7 +26,7 @@ In your <code>application.html.erb</code>:
     ...
     <%= metamagic :title => "My default title", :description => "My default description.", :keywords => %w(keyword1 keyword2 keyword3) %>
     ...
-  </head
+  </head>
 
 For custom meta tags, just call it like this in your controller:
   
@@ -40,5 +40,7 @@ To use in conjunction with the headliner plugin (http://github.com/mokolabs/head
 
   <%= metamagic :title => @title %>
 
+Title meta tags will automatically be translated to <title>xx</title>.
 
-Copyright (c) 2010 Lasse Bunk, released under the MIT license
+
+Copyright (c) 2010-2012 Lasse Bunk, released under the MIT license
