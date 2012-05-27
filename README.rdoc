@@ -42,5 +42,10 @@ To use in conjunction with the headliner plugin (http://github.com/mokolabs/head
 
 Title meta tags will automatically be translated to <title>xx</title>.
 
+== Contributors
+
+* Lasse Bunk (creator)
+* Mohith Thimmaiah
+
 
 Copyright (c) 2010-2012 Lasse Bunk, released under the MIT license
