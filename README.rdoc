@@ -11,14 +11,6 @@ Then run <code>bundle install</code>.
 
 == Example
 
-In your controller:
-
-  def show
-    @product = Product.find(params[:id])
-    
-    meta :title => @product.name, :description => @product.description, :keywords => @product.tag_list
-  end
-  
 In your <code>application.html.erb</code>:
 
   <head>
