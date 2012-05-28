@@ -26,7 +26,7 @@ For custom meta tags, just call it like this in your controller:
   
 With custom properties:
 
-  meta :image => { :property => "og:image", :content => "http://mydomain.com/images/my_image.jpg" }
+  meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
 
 Title meta tags will automatically be translated to <code><title>xx</title></code>.
 
