@@ -30,11 +30,6 @@ With custom properties:
 
 Title meta tags will automatically be translated to <code><title>xx</title></code>.
 
-== Todo's
-
-* Remove controller method
-* Remove plugin init method
-
 == Contributors
 
 * Lasse Bunk (creator)
