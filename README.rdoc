@@ -34,6 +34,10 @@ To use in conjunction with the headliner plugin (http://github.com/mokolabs/head
 
 Title meta tags will automatically be translated to <title>xx</title>.
 
+== Todo's
+
+* Remove controller method
+
 == Contributors
 
 * Lasse Bunk (creator)
