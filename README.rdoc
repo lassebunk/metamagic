@@ -3,7 +3,7 @@ Metamagic is a simple Ruby on Rails plugin for creating meta tags.
 
 == Installation
 
-In your <em>Gemfile</em>:
+In your *Gemfile*:
 
   gem 'metamagic'
   
@@ -28,7 +28,7 @@ With custom properties:
 
   meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
 
-Title meta tags will automatically be translated to <code><title>xx</title></code>.
+Title meta tags will automatically be translated to <code><title></code> tags.
 
 == Contributors
 
