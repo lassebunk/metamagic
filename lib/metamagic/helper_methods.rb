@@ -42,6 +42,14 @@ module Metamagic
         if tag[:name] == :title
           out << content_tag(:title, tag[:content])
         else
+          # replace array with comma separated list
+          tag.each_pair do |key, value|
+            if value.is_a?(Array)
+              tag[key] = value.join(", ")
+            end
+          end
+          
+          # add tag
           out << tag(:meta, tag)
         end
       end
