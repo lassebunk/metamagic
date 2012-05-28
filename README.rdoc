@@ -28,11 +28,7 @@ With custom properties:
 
   meta :image => { :property => "og:image", :content => "http://mydomain.com/images/my_image.jpg" }
 
-To use in conjunction with the headliner plugin (http://github.com/mokolabs/headliner):
-
-  <%= metamagic :title => @title %>
-
-Title meta tags will automatically be translated to <title>xx</title>.
+Title meta tags will automatically be translated to <code><title>xx</title></code>.
 
 == Todo's
 
