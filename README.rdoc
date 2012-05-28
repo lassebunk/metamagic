@@ -37,6 +37,7 @@ Title meta tags will automatically be translated to <title>xx</title>.
 == Todo's
 
 * Remove controller method
+* Remove plugin init method
 
 == Contributors
 
