@@ -28,7 +28,7 @@ With custom properties:
 
   meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
 
-Title meta tags will automatically be translated to <code><title>xx</title></code>.
+Title meta tags will automatically be translated to <code><title></code> tags.
 
 == Contributors
 
