@@ -20,7 +20,11 @@ module Metamagic
       options.each do |option|
         if option.is_a?(Hash)
           option.each_pair do |key, value|
-            add_tag_if_not_existing :name => key, :content => value
+            if value.is_a?(Array)
+              add_tag_if_not_existing :name => key, :content => CGI::escapeHTML(value.join(", "))
+            else
+              add_tag_if_not_existing :name => key, :content => CGI::escapeHTML(value)
+            end
           end
         elsif option.is_a?(Array)
           option.each do |tag|
@@ -42,13 +46,6 @@ module Metamagic
         if tag[:name] == :title
           out << content_tag(:title, tag[:content])
         else
-          # replace array with comma separated list
-          tag.each_pair do |key, value|
-            if value.is_a?(Array)
-              tag[key] = value.join(", ")
-            end
-          end
-          
           # add tag
           out << tag(:meta, tag)
         end
