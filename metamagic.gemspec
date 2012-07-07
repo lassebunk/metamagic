@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "metamagic"
-  s.version = "2.0.3"
+  s.version = "2.0.4"
 
   s.author = "Lasse Bunk"
   s.email = "lassebunk@gmail.com"
