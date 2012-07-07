@@ -21,9 +21,9 @@ module Metamagic
         if option.is_a?(Hash)
           option.each_pair do |key, value|
             if value.is_a?(Array)
-              add_tag_if_not_existing :name => key, :content => CGI::escapeHTML(value.join(", "))
+              add_tag_if_not_existing :name => key, :content => value.join(", ")
             else
-              add_tag_if_not_existing :name => key, :content => CGI::escapeHTML(value || "")
+              add_tag_if_not_existing :name => key, :content => value
             end
           end
         elsif option.is_a?(Array)
