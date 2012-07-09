@@ -20,7 +20,7 @@ In your <code>application.html.erb</code>:
     ...
   </head>
 
-For custom meta tags, just call it like this in your controller:
+For custom meta tags, just call it like this in your view:
   
   meta :title => "My title", :my_custom_tag => "My custom value"
   
