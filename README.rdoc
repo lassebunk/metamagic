@@ -20,13 +20,19 @@ In your <code>application.html.erb</code>:
     ...
   </head>
 
-For custom meta tags, just call it like this in your view:
+For custom meta tags, just call it like this in the top of your view:
   
+  <%
   meta :title => "My title", :my_custom_tag => "My custom value"
+  %>
   
 With custom properties:
 
+  <%
   meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
+  %>
+
+And then just put your content below.
 
 Title meta tags will automatically be translated to <code><title></code> tags.
 
