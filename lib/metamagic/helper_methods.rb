@@ -3,19 +3,19 @@ module Metamagic
     def meta_tags
       @meta_tags ||= []
     end
-    
+
     def meta(*options)
       # add page specific meta tags
       add_meta_tags options
     end
-    
+
     def add_tag_if_not_existing(new_tag)
       # add meta tag if it's not existing
       unless meta_tags.find { |tag| tag[:name] && new_tag[:name] && tag[:name] == new_tag[:name] }
         meta_tags << new_tag
       end
     end
-    
+
     def add_meta_tags(options)
       options.each do |option|
         if option.is_a?(Hash)
@@ -39,7 +39,7 @@ module Metamagic
     def metamagic(*options)
       # apply default meta tags if they don't exist
       add_meta_tags options
-      
+
       # loop through the added tags
       out = []
       meta_tags.each do |tag|
@@ -50,9 +50,9 @@ module Metamagic
           out << tag(:meta, tag)
         end
       end
-      
+
       # return tags
-      out.join.html_safe
+      out.join("\n").html_safe
     end
   end
 end
