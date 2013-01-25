@@ -11,8 +11,8 @@ gem 'metamagic'
   
 Then run `bundle install`.
 
-Example
--------
+Examples
+--------
 
 ### Basic usage
 
