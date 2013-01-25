@@ -1,4 +1,4 @@
-Metamagic is a simple Ruby on Rails plugin for creating meta tags.
+Metamagic is a simple [Ruby on Rails](http://rubyonrails.org) plugin for creating meta tags.
 
 Installation
 ------------
@@ -14,25 +14,71 @@ Then run `bundle install`.
 Example
 -------
 
-In your *application.html.erb*:
+### Basic usage
+
+In your *app/views/layouts/application.html.erb*:
 
 ```erb
 <head>
-  <title>My Site</title>
+  <%= metamagic %>
   ...
+</head>
+```
+
+Then, at the top of your view, e.g. *app/views/posts/show.html.erb*:
+
+```erb
+<%
+meta :title => "My title",
+     :description => "My descrtiption",
+     :keywords => %w(keyword1 keyword2 keyword3)
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  <title>My title</title>
+  <meta content="My description" name="description" />
+  <meta content="keyword1, keyword2, keyword3" name="keywords" />
+  ...
+</head>
+```
+
+### Specifying default meta tag values
+
+It's possible to specify default values to be shown if a view doesn't specify its own values. In your *app/views/layouts/application.html.erb*:
+
+```erb
+<head>
   <%= metamagic :title => "My default title", :description => "My default description.", :keywords => %w(keyword1 keyword2 keyword3) %>
   ...
 </head>
 ```
 
+### Custom meta tags
+
 For custom meta tags, just call it like this in the top of your view:
 
 ```erb
 <%
-meta :title => "My title", :my_custom_tag => "My custom value"
+meta :my_custom_tag => "My custom value"
 %>
 ```
   
+This will generate the following:
+
+```html
+<head>
+  ...
+  <meta content="My custom value" name="my_custom_tag" />
+  ...
+</head>
+```
+
+### Custom properties (like Open Graph)
+
 With custom properties:
 
 ```erb
@@ -41,9 +87,15 @@ meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.
 %>
 ```
 
-And then just put your content below.
+This will generate the following:
 
-Title meta tags will automatically be translated to `<title>` tags.
+```html
+<head>
+  ...
+  <meta content="http://mydomain.com/images/my_image.jpg" property="og:image" />
+  ...
+</head>
+```
 
 Contributors
 ------------
