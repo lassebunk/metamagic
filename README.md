@@ -30,7 +30,7 @@ Then, at the top of your view, e.g. *app/views/posts/show.html.erb*:
 ```erb
 <%
 meta :title => "My title",
-     :description => "My descrtiption",
+     :description => "My description",
      :keywords => %w(keyword1 keyword2 keyword3)
 %>
 ```
