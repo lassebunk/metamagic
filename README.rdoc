@@ -38,8 +38,6 @@ Title meta tags will automatically be translated to <code><title></code> tags.
 
 == Contributors
 
-* Lasse Bunk (creator)
-* Mohith Thimmaiah
-
+* [See the list of contributors](https://github.com/lassebunk/metamagic/graphs/contributors)
 
 Copyright (c) 2010-2012 Lasse Bunk, released under the MIT license
