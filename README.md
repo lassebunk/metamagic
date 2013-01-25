@@ -57,6 +57,8 @@ It's possible to specify default values to be shown if a view doesn't specify it
 </head>
 ```
 
+These values are then inserted if a view doesn't set others.
+
 ### Custom meta tags
 
 For custom meta tags, just call it like this in the top of your view:
