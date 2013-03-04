@@ -99,6 +99,11 @@ This will generate the following:
 </head>
 ```
 
+Versioning
+----------
+
+Follows [semantic versioning](http://semver.org/).
+
 Contributors
 ------------
 
