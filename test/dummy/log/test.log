@@ -1,0 +1,60 @@
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+-------------------------
+MetamagicTest: test_truth
+-------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+-----------------------------
+HelperMethodsTest: test_truth
+-----------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+-----------------------------
+HelperMethodsTest: test_truth
+-----------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+-----------------------------
+HelperMethodsTest: test_truth
+-----------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+HelperMethodsTest: test_meta_tags_generation
+--------------------------------------------
+  [1m[35m (0.1ms)[0m  rollback transaction

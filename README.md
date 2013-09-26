@@ -1,3 +1,6 @@
+Metamagic
+=========
+
 Metamagic is a simple [Ruby on Rails](http://rubyonrails.org) plugin for creating meta tags.
 
 Installation
@@ -99,10 +102,26 @@ This will generate the following:
 </head>
 ```
 
+Requirements
+------------
+
+* Rails 3.0 or above
+* Ruby 1.9 or above
+
 Versioning
 ----------
 
 Follows [semantic versioning](http://semver.org/).
+
+Contributing
+------------
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new pull r
+equest
 
 Contributors
 ------------
