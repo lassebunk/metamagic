@@ -8,14 +8,16 @@ class HelperMethodsTest < ActionView::TestCase
          description: "My description.",
          keywords: ["One", "Two", "Three"]
 
-    assert_equal %{<title>My Title</title>\n<meta content="My description." name="description" />\n<meta content="One, Two, Three" name="keywords" />}, metamagic
+    assert_equal %{<title>My Title</title>\n<meta content="My description." name="description" />\n<meta content="One, Two, Three" name="keywords" />},
+                 metamagic
   end
 
   test "default meta tags" do
     meta title: "Test Title",
          test: "Test tag"
 
-    assert_equal %{<title>Test Title</title>\n<meta content="Test tag" name="test" />\n<meta content="Default description" name="description" />}, metamagic(title: "Default Title", description: "Default description", test: "Default test")
+    assert_equal %{<title>Test Title</title>\n<meta content="Test tag" name="test" />\n<meta content="Default description" name="description" />},
+                 metamagic(title: "Default Title", description: "Default description", test: "Default test")
   end
 
   test "not adding existing meta tags" do
@@ -25,6 +27,7 @@ class HelperMethodsTest < ActionView::TestCase
     meta title: "Second Title",
          description: "Second description."
 
-    assert_equal %{<title>Test Title</title>\n<meta content="Test description." name="description" />}, metamagic
+    assert_equal %{<title>Test Title</title>\n<meta content="Test description." name="description" />},
+                 metamagic
   end
 end
