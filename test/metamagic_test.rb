@@ -10,4 +10,14 @@ class HelperMethodsTest < ActionView::TestCase
 
     assert_equal %{<title>My Title</title>\n<meta content="My description." name="description" />\n<meta content="One, Two, Three" name="keywords" />}, metamagic
   end
+
+  test "not adding existing meta tags" do
+    meta title: "Test Title",
+         description: "Test description."
+
+    meta title: "Second Title",
+         description: "Second description."
+
+    assert_equal %{<title>Test Title</title>\n<meta content="Test description." name="description" />}, metamagic
+  end
 end
