@@ -30,4 +30,20 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal %{<title>Test Title</title>\n<meta content="Test description." name="description" />},
                  metamagic
   end
+
+  test "meta tags using property attribute rather than name" do
+    meta [property: "og:url", content: "http://test.url"]
+
+    assert_equal %{<meta content="http://test.url" property="og:url" />},
+                 metamagic
+  end
+
+  test "overriding default meta tags if the property attribute matches" do
+    meta [property: "og:url", content: "http://override.url"]
+
+    assert_equal %{<meta content="http://override.url" property="og:url" />},
+                 metamagic([property: "og:url", content: "http://default.url"])
+  end
+
+
 end
