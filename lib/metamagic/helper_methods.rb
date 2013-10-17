@@ -10,10 +10,10 @@ module Metamagic
     end
 
     def add_tag_if_not_existing(new_tag)
-      # add meta tag if it's not existing
-      unless meta_tags.find { |tag| tag[:name] && new_tag[:name] && tag[:name] == new_tag[:name] }
-        meta_tags << new_tag
-      end
+      # add meta tag if there's not an existing one with the same name or property attribute
+      return if meta_tags.find { |tag| tag[:name] && new_tag[:name] && tag[:name] == new_tag[:name] }
+      return if meta_tags.find { |tag| tag[:property] && new_tag[:property] && tag[:property] == new_tag[:property] }
+      meta_tags << new_tag
     end
 
     def add_meta_tags(options)
