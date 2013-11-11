@@ -20,6 +20,22 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic(title: "Default Title", description: "Default description", test: "Default test")
   end
 
+  test "default meta tags with replacement" do
+    meta title: "Test Title - [defaults]",
+         test: "Test tag, [defaults]"
+
+    assert_equal %{<title>Test Title - Default Title</title>\n<meta content="Test tag, Default test" name="test" />\n<meta content="Default description" name="description" />},
+                 metamagic(title: "Default Title", description: "Default description", test: "Default test")
+  end
+
+  test "[defaults] in default tag" do
+    meta title: "Test Title - [defaults]",
+         test: "Test tag, [defaults]"
+
+    assert_equal %{<title>Test Title - Default Title</title>\n<meta content="Test tag, [defaults] test" name="test" />\n<meta content="Default description" name="description" />},
+                 metamagic(title: "Default Title", description: "Default description", test: "[defaults] test")
+  end
+
   test "not adding existing meta tags" do
     meta title: "Test Title",
          description: "Test description."
