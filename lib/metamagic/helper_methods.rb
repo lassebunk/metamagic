@@ -9,10 +9,20 @@ module Metamagic
       add_meta_tags options
     end
 
-    def add_tag_if_not_existing(new_tag)
+    def add_tag_if_not_existing_or_insert_defaults(new_tag)
+      # Look for existing tag name
+      existing_name_tag = meta_tags.find { |tag| tag[:name] && new_tag[:name] && tag[:name] == new_tag[:name] }
+      if existing_name_tag
+        # Replace [defaults] with existing content
+        return existing_name_tag[:content] = existing_name_tag[:content].sub('[defaults]', new_tag[:content])
+      end
+      # Look for existing tag property
+      existing_property_tag = meta_tags.find { |tag| tag[:property] && new_tag[:property] && tag[:property] == new_tag[:property] }
+      if existing_property_tag
+        # Replace [defaults] with existing content
+        return existing_property_tag[:content] = existing_property_tag[:content].sub('[defaults]', new_tag[:content])
+      end
       # add meta tag if there's not an existing one with the same name or property attribute
-      return if meta_tags.find { |tag| tag[:name] && new_tag[:name] && tag[:name] == new_tag[:name] }
-      return if meta_tags.find { |tag| tag[:property] && new_tag[:property] && tag[:property] == new_tag[:property] }
       meta_tags << new_tag
     end
 
@@ -21,14 +31,14 @@ module Metamagic
         if option.is_a?(Hash)
           option.each_pair do |key, value|
             if value.is_a?(Array)
-              add_tag_if_not_existing :name => key, :content => value.join(", ")
+              add_tag_if_not_existing_or_insert_defaults :name => key, :content => value.join(", ")
             else
-              add_tag_if_not_existing :name => key, :content => value
+              add_tag_if_not_existing_or_insert_defaults :name => key, :content => value
             end
           end
         elsif option.is_a?(Array)
           option.each do |tag|
-            add_tag_if_not_existing tag
+            add_tag_if_not_existing_or_insert_defaults tag
           end
         else
           raise TypeError, "Unknown tag type #{tag.class.name}. Use either Hash or Array."
@@ -53,6 +63,10 @@ module Metamagic
 
       # return tags
       out.join("\n").html_safe
+    end
+
+    def metappend(*options)
+
     end
   end
 end
