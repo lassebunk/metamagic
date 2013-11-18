@@ -12,13 +12,13 @@ module Metamagic
     def add_tag_if_not_existing_or_insert_defaults(new_tag)
       # Look for existing tag name
       existing_name_tag = meta_tags.find { |tag| tag[:name] && new_tag[:name] && tag[:name] == new_tag[:name] }
-      if existing_name_tag
+      if existing_name_tag && existing_name_tag[:content]
         # Replace [defaults] with existing content
         return existing_name_tag[:content] = existing_name_tag[:content].sub('[defaults]', new_tag[:content])
       end
       # Look for existing tag property
       existing_property_tag = meta_tags.find { |tag| tag[:property] && new_tag[:property] && tag[:property] == new_tag[:property] }
-      if existing_property_tag
+      if existing_property_tag && existing_property_tag[:content]
         # Replace [defaults] with existing content
         return existing_property_tag[:content] = existing_property_tag[:content].sub('[defaults]', new_tag[:content])
       end
