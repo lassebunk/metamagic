@@ -64,6 +64,38 @@ It's possible to specify default values to be shown if a view doesn't specify it
 
 These values are then inserted if a view doesn't set others.
 
+### Specifying default meta tag values inserted into page specific values
+
+It is possible to add the `[defaults]` keyword in a `meta` helper that will include the default value set in `metamagic` helper if exists.
+
+```erb
+<%
+meta :title => "My page title - [defaults]",
+     :description => "My page description - [defaults]",
+     :keywords => %w(my page keywords [defaults])
+%>
+```
+
+and
+
+```erb
+<head>
+  <%= metamagic :title => "My app title", :description => "My app description", :keywords => %w(my app keywords) %>
+  ...
+</head>
+```
+
+This will generate the following:
+
+```html
+<head>
+  <title>My page title - My app title</title>
+  <meta content="My page description - My app description" name="description" />
+  <meta content="my, page, keywords, my, app, keywords" name="keywords" />
+  ...
+</head>
+```
+
 ### Custom meta tags
 
 For custom meta tags, just call it like this in the top of your view:
