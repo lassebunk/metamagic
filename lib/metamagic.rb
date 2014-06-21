@@ -6,7 +6,7 @@
   tags/property_tag
   tags/custom_tag
   renderer
-  helper_methods
+  view_helper
 }.each { |f| require "metamagic/#{f}" }
 
-ActionView::Base.send :include, Metamagic::HelperMethods
+ActionView::Base.send :include, Metamagic::ViewHelper

@@ -1,5 +1,5 @@
 module Metamagic
-  module HelperMethods
+  module ViewHelper
     def meta(hash = {})
       metamagic_renderer.add hash
     end

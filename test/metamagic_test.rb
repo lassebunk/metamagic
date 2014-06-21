@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class HelperMethodsTest < ActionView::TestCase
-  include Metamagic::HelperMethods
+  include Metamagic::ViewHelper
 
   test "meta tags generation" do
     meta title: "My Title",
