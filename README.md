@@ -1,6 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/lassebunk/metamagic.png)](http://travis-ci.org/lassebunk/metamagic)
 
-![Meta Magic Motherfuckers](http://i.imgur.com/lwYIfEG.png)
+![Meta Magic Motherfuckers](http://i.imgur.com/4KtY4qX.png)
 
 Metamagic
 =========
