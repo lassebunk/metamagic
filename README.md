@@ -16,7 +16,7 @@ Installation
 In your *Gemfile*:
 
 ```ruby
-gem 'metamagic', '3.0.0.beta1'
+gem 'metamagic', '3.0.0.beta2'
 ```
   
 Then run `bundle install`.
