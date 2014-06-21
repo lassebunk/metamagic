@@ -54,6 +54,31 @@ This will generate the following:
 </head>
 ```
 
+### Shortcut helpers
+
+For easy setting of meta tags, you can use the shortcut helpers like this:
+
+```erb
+<%
+title "My Title"
+description "My description"
+keywords %w(keyword1 keyword2 keyword3)
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  <title>My Title</title>
+  <meta content="My description" name="description" />
+  <meta content="keyword1, keyword2, keyword3" name="keywords" />
+  ...
+</head>
+```
+
+**Note:** Shortcut helpers will never override methods already present in the view context, so for example if you have a method named `title`, this will not be overridden.
+
 ### Specifying default meta tag values
 
 It's possible to specify default values to be shown if a view doesn't specify its own values. In your *app/views/layouts/application.html.erb*:
@@ -109,6 +134,14 @@ This will generate the following:
 </head>
 ```
 
+The above can also be written with the shortcut helper:
+
+```erb
+<%
+og image: "http://mydomain.com/images/my_image.jpg"
+%>
+```
+
 #### Twitter Cards
 
 ```erb
@@ -129,6 +162,15 @@ This will generate the following:
   <meta content="@flickr" property="twitter:site" />
   ...
 </head>
+```
+
+The above can also be written with the shortcut helper:
+
+```erb
+<%
+twitter card: "summary",
+        site: "@flickr"
+%>
 ```
 
 ### Custom tags

@@ -9,6 +9,14 @@ module Metamagic
       metamagic_renderer.render
     end
 
+    def method_missing(method, *args, &block)
+      if metamagic_renderer.has_tag_type?(method)
+        meta method => args.first
+      else
+        super
+      end
+    end
+
     private
 
     def metamagic_renderer

@@ -67,4 +67,16 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal %{<title>Test Title</title>\n<custom_tag one="custom:first" two="This is the first" />\n<custom_tag one="custom:second" two="This is the second" />},
                  metamagic
   end
+
+  test "shortcut helpers" do
+    title "My Title"
+    description "My description"
+    keywords %w{one two three}
+    og image: "http://test.com/img.jpg"
+    twitter card: :summary, site: "@flickr"
+    meta bla: "Test"
+
+    assert_equal %{<title>My Title</title>\n<meta content="My description" name="description" />\n<meta content="one, two, three" name="keywords" />\n<meta content="http://test.com/img.jpg" property="og:image" />\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />\n<meta content="Test" name="bla" />},
+                 metamagic
+  end
 end

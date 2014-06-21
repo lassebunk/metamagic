@@ -1,9 +1,11 @@
 module Metamagic
   class Renderer
     DEFAULT_TAG_TYPES = {
-      title:   TitleTag,
-      og:      PropertyTag,
-      twitter: PropertyTag
+      title:       TitleTag,
+      description: MetaTag,
+      keywords:    MetaTag,
+      og:          PropertyTag,
+      twitter:     PropertyTag
     }
 
     class << self
@@ -41,6 +43,10 @@ module Metamagic
           klass.new(self, k, v)
         end
       end
+    end
+
+    def has_tag_type?(prefix)
+      self.class.tag_types.has_key?(prefix)
     end
 
     def render
