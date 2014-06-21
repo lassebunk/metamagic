@@ -31,19 +31,40 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic
   end
 
-  test "meta tags using property attribute rather than name" do
-    meta [property: "og:url", content: "http://test.url"]
+  test "open graph" do
+    meta title: "Test Title",
+         og: {
+           image: {
+             url: "http://test.com/image.jpg",
+             type: "image/png"
+           }
+         }
 
-    assert_equal %{<meta content="http://test.url" property="og:url" />},
+    assert_equal %{<title>Test Title</title>\n<meta content="http://test.com/image.jpg" property="og:image:url" />\n<meta content="image/png" property="og:image:type" />},
                  metamagic
   end
 
-  test "overriding default meta tags if the property attribute matches" do
-    meta [property: "og:url", content: "http://override.url"]
+  test "twitter cards" do
+    meta title: "Test Title",
+         twitter: {
+           card: :summary,
+           site: "@flickr"
+         }
 
-    assert_equal %{<meta content="http://override.url" property="og:url" />},
-                 metamagic([property: "og:url", content: "http://default.url"])
+    assert_equal %{<title>Test Title</title>\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />},
+                 metamagic
   end
 
+  test "custom tags" do
+    Metamagic::Renderer.register_tag_type :custom, ->(key, value) { tag(:custom_tag, one: key, two: value) }
 
+    meta title: "Test Title",
+         custom: {
+           first: "This is the first",
+           second: "This is the second"
+         }
+
+    assert_equal %{<title>Test Title</title>\n<custom_tag one="custom:first" two="This is the first" />\n<custom_tag one="custom:second" two="This is the second" />},
+                 metamagic
+  end
 end
