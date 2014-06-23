@@ -248,6 +248,15 @@ This will render the following:
 <custom_tag first="custom:key_two" second="My second key" />
 ```
 
+When you register a new tag type, a shortcut helper is automatically defined. The above could therefore also be written as:
+
+```erb
+<%
+custom key_one: "My first key",
+       key_two: "My second key"
+%>
+```
+
 Requirements
 ------------
 
