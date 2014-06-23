@@ -99,4 +99,10 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal %{<title>My Title</title>\n<meta content="one, two, three" name="keywords" />\n<meta content="My description." name="description" />\n<meta content="http://test.com/image.png" property="og:image" />\n<meta content="summary" property="twitter:card" />},
                  metamagic
   end
+
+  test "old property definition" do
+    assert_raises ArgumentError do
+      meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
+    end
+  end
 end

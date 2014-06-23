@@ -35,6 +35,8 @@ module Metamagic
     end
 
     def add(hash = {})
+      raise ArgumentError, "Defining meta properties via arrays has been removed in Metamagic v3.0 and replaced by some pretty helpers. Please see the readme at https://github.com/lassebunk/metamagic for more info." if hash.is_a?(Array)
+
       transform_hash(hash).each do |k, v|
         klass = self.class.tag_type_for_key(k)
         tag = if klass.is_a?(Proc)
