@@ -175,6 +175,49 @@ twitter card: "summary",
 %>
 ```
 
+#### Other custom properties
+
+You can add custom properties like this:
+
+```erb
+<%
+meta property: {
+  one: "Property One",
+  two: "Property Two",
+  nested: {
+    a: "Nested A",
+    b: "Nested B"
+  }
+}
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  ...
+  <meta content="Property One" property="one" />
+  <meta content="Property Two" property="two" />
+  <meta content="Nested A" property="nested:a" />
+  <meta content="Nested B" property="nested:b" />
+  ...
+</head>
+```
+
+The above could also be written with the `property` shortcut helper:
+
+```erb
+<%
+property one: "Property One",
+         two: "Property Two",
+         nested: {
+           a: "Nested A",
+           b: "Nested B"
+         }
+%>
+```
+
 ### Custom tags
 
 You can add custom rendering for tag prefixes you specify.

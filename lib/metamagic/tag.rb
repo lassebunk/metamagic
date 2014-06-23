@@ -10,6 +10,10 @@ module Metamagic
       raise "#{self.class.name}#to_html must be overridden to render tag"
     end
 
+    def ==(other)
+      self.class == other.class && self.key == other.key
+    end
+
     def method_missing(*args)
       context.send(*args)
     end

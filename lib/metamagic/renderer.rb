@@ -4,6 +4,7 @@ module Metamagic
       title:       TitleTag,
       description: MetaTag,
       keywords:    MetaTag,
+      property:    PropertyTag,
       og:          PropertyTag,
       twitter:     PropertyTag
     }
@@ -36,12 +37,12 @@ module Metamagic
     def add(hash = {})
       transform_hash(hash).each do |k, v|
         klass = self.class.tag_type_for_key(k)
-        next if tags.any? { |t| t.class == klass && t.key == k }
-        tags << if klass.is_a?(Proc)
+        tag = if klass.is_a?(Proc)
           CustomTag.new(self, k, v, klass)
         else
           klass.new(self, k, v)
         end
+        tags << tag unless tags.include?(tag)
       end
     end
 
