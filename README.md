@@ -1,9 +1,14 @@
 [![Build Status](https://secure.travis-ci.org/lassebunk/metamagic.png)](http://travis-ci.org/lassebunk/metamagic)
 
+![Meta Magic Motherfuckers](http://i.imgur.com/4KtY4qX.png)
+
 Metamagic
 =========
 
 Metamagic is a simple [Ruby on Rails](http://rubyonrails.org) plugin for creating meta tags.
+It supports regular meta tags, [OpenGraph](http://ogp.me/) (Facebook), [Twitter Cards](https://dev.twitter.com/docs/cards/types/summary-card), and custom tags.
+
+See the [changelog](https://github.com/lassebunk/metamagic/blob/master/CHANGELOG.md) for changes in version 3.0.
 
 Installation
 ------------
@@ -11,7 +16,7 @@ Installation
 In your *Gemfile*:
 
 ```ruby
-gem 'metamagic'
+gem 'metamagic', '3.0.0.beta2'
 ```
   
 Then run `bundle install`.
@@ -34,9 +39,9 @@ Then, at the top of your view, e.g. *app/views/posts/show.html.erb*:
 
 ```erb
 <%
-meta :title => "My title",
-     :description => "My description",
-     :keywords => %w(keyword1 keyword2 keyword3)
+meta title: "My Title",
+     description: "My description",
+     keywords: %w(keyword1 keyword2 keyword3)
 %>
 ```
 
@@ -44,12 +49,37 @@ This will generate the following:
 
 ```html
 <head>
-  <title>My title</title>
+  <title>My Title</title>
   <meta content="My description" name="description" />
   <meta content="keyword1, keyword2, keyword3" name="keywords" />
   ...
 </head>
 ```
+
+### Shortcut helpers
+
+For easy setting of meta tags, you can use the shortcut helpers like this:
+
+```erb
+<%
+title "My Title"
+description "My description"
+keywords %w(keyword1 keyword2 keyword3)
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  <title>My Title</title>
+  <meta content="My description" name="description" />
+  <meta content="keyword1, keyword2, keyword3" name="keywords" />
+  ...
+</head>
+```
+
+**Note:** Shortcut helpers will never override methods already present in the view context, so for example if you have a method named `title`, this will not be overridden.
 
 ### Specifying default meta tag values
 
@@ -57,7 +87,7 @@ It's possible to specify default values to be shown if a view doesn't specify it
 
 ```erb
 <head>
-  <%= metamagic :title => "My default title", :description => "My default description.", :keywords => %w(keyword1 keyword2 keyword3) %>
+  <%= metamagic title: "My default title", description: "My default description.", keywords: %w(keyword1 keyword2 keyword3) %>
   ...
 </head>
 ```
@@ -66,11 +96,11 @@ These values are then inserted if a view doesn't set others.
 
 ### Custom meta tags
 
-For custom meta tags, just call it like this in the top of your view:
+For custom meta tags, you can use it like this:
 
 ```erb
 <%
-meta :my_custom_tag => "My custom value"
+meta my_custom_name: "My custom value"
 %>
 ```
   
@@ -79,18 +109,20 @@ This will generate the following:
 ```html
 <head>
   ...
-  <meta content="My custom value" name="my_custom_tag" />
+  <meta content="My custom value" name="my_custom_name" />
   ...
 </head>
 ```
 
-### Custom properties (like Open Graph)
+### Custom properties
 
-With custom properties:
+#### OpenGraph (Facebook)
 
 ```erb
 <%
-meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
+meta og: {
+  image: "http://mydomain.com/images/my_image.jpg"
+}
 %>
 ```
 
@@ -102,6 +134,127 @@ This will generate the following:
   <meta content="http://mydomain.com/images/my_image.jpg" property="og:image" />
   ...
 </head>
+```
+
+The above can also be written with the shortcut helper:
+
+```erb
+<%
+og image: "http://mydomain.com/images/my_image.jpg"
+%>
+```
+
+#### Twitter Cards
+
+```erb
+<%
+meta twitter: {
+  card: "summary",
+  site: "@flickr"
+}
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  ...
+  <meta content="summary" property="twitter:card" />
+  <meta content="@flickr" property="twitter:site" />
+  ...
+</head>
+```
+
+The above can also be written with the shortcut helper:
+
+```erb
+<%
+twitter card: "summary",
+        site: "@flickr"
+%>
+```
+
+#### Other custom properties
+
+You can add custom properties like this:
+
+```erb
+<%
+meta property: {
+  one: "Property One",
+  two: "Property Two",
+  nested: {
+    a: "Nested A",
+    b: "Nested B"
+  }
+}
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  ...
+  <meta content="Property One" property="one" />
+  <meta content="Property Two" property="two" />
+  <meta content="Nested A" property="nested:a" />
+  <meta content="Nested B" property="nested:b" />
+  ...
+</head>
+```
+
+The above could also be written with the `property` shortcut helper:
+
+```erb
+<%
+property one: "Property One",
+         two: "Property Two",
+         nested: {
+           a: "Nested A",
+           b: "Nested B"
+         }
+%>
+```
+
+### Custom tags
+
+You can add custom rendering for tag prefixes you specify.
+
+In *config/initializers/metamagic.rb*:
+
+```ruby
+Metamagic::Renderer.register_tag_type :custom, ->(key, value) { tag(:custom_tag, first: key, second: value) }
+```
+
+In your view:
+
+```erb
+<%
+meta title: "My Title",
+     custom: {
+       key_one: "My first key",
+       key_two: "My second key"
+     }
+%>
+```
+
+This will render the following:
+
+```html
+<title>My Title</title>
+<custom_tag first="custom:key_one" second="My first key" />
+<custom_tag first="custom:key_two" second="My second key" />
+```
+
+When you register a new tag type, a shortcut helper is automatically defined. The above could therefore also be written as:
+
+```erb
+<%
+custom key_one: "My first key",
+       key_two: "My second key"
+%>
 ```
 
 Requirements
@@ -120,14 +273,14 @@ Contributing
 
 1. Fork the project
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new pull r
-equest
+3. Make your changes and make sure the tests pass (run `rake`)
+4. Commit your changes (`git commit -am 'Add new feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create new pull request
 
 Contributors
 ------------
 
 * [See the list of contributors](https://github.com/lassebunk/metamagic/graphs/contributors)
 
-Copyright (c) 2010-2013 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
+Copyright (c) 2010-2014 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
