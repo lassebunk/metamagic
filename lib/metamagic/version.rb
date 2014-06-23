@@ -1,3 +1,3 @@
 module Metamagic
-  VERSION = "3.0.0.beta3"
+  VERSION = "3.0.0"
 end
