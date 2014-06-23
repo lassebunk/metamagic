@@ -26,16 +26,7 @@ Examples
 
 ### Basic usage
 
-In your *app/views/layouts/application.html.erb*:
-
-```erb
-<head>
-  <%= metamagic %>
-  ...
-</head>
-```
-
-Then, at the top of your view, e.g. *app/views/posts/show.html.erb*:
+At the top of your view, e.g. *app/views/posts/show.html.erb*:
 
 ```erb
 <%
@@ -43,6 +34,15 @@ meta title: "My Title",
      description: "My description",
      keywords: %w(keyword1 keyword2 keyword3)
 %>
+```
+
+And in *app/views/layouts/application.html.erb*:
+
+```erb
+<head>
+  <%= metamagic %>
+  ...
+</head>
 ```
 
 This will generate the following:
