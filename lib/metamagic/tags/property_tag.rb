@@ -8,5 +8,9 @@ module Metamagic
     def to_html
       Array(value).map { |value| tag(:meta, property: key, content: value) }.join("\n").html_safe
     end
+
+    def sort_order
+      3
+    end
   end
 end

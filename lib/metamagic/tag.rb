@@ -10,8 +10,16 @@ module Metamagic
       raise "#{self.class.name}#to_html must be overridden to render tag"
     end
 
+    def sort_order
+      1000
+    end
+
     def ==(other)
       self.class == other.class && self.key == other.key
+    end
+
+    def <=>(other)
+      [sort_order, self.class.name] <=> [other.sort_order, other.class.name]
     end
 
     def method_missing(*args)

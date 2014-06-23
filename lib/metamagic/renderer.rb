@@ -51,7 +51,7 @@ module Metamagic
     end
 
     def render
-      tags.map(&:to_html).join("\n").html_safe
+      tags.sort.map(&:to_html).join("\n").html_safe
     end
 
     def method_missing(*args)

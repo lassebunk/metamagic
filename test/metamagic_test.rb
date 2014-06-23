@@ -76,7 +76,10 @@ class HelperMethodsTest < ActionView::TestCase
     twitter card: :summary, site: "@flickr"
     meta bla: "Test"
 
-    assert_equal %{<title>My Title</title>\n<meta content="My description" name="description" />\n<meta content="one, two, three" name="keywords" />\n<meta content="http://test.com/img.jpg" property="og:image" />\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />\n<meta content="Test" name="bla" />},
+    assert_equal %{<title>My Title</title>\n<meta content="My description" name="description" />\n<meta content="one, two, three" name="keywords" />\n<meta content="Test" name="bla" />\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />\n<meta content="http://test.com/img.jpg" property="og:image" />},
+                 metamagic
+  end
+
   test "property helper" do
     meta property: { one: "Property One", two: "Property Two", "og:image" => "http://test.com/image.png", nested: { a: "Nested A" } }
     property two: "Property Two second", three: "Property Three", nested: { a: "Nested A second", b: "Nested B" }
@@ -86,6 +89,14 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic
   end
 
+  test "sorting tags" do
+    twitter card: :summary
+    og image: "http://test.com/image.png"
+    description "My description."
+    keywords %w{one two three}
+    title "My Title"
+
+    assert_equal %{<title>My Title</title>\n<meta content="one, two, three" name="keywords" />\n<meta content="My description." name="description" />\n<meta content="http://test.com/image.png" property="og:image" />\n<meta content="summary" property="twitter:card" />},
                  metamagic
   end
 end
