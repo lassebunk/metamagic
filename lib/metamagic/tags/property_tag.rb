@@ -6,7 +6,7 @@ module Metamagic
     end
 
     def to_html
-      Array(value).map { |value| tag(:meta, property: key, content: value) }.join("\n").html_safe
+      Array(value).compact.map { |value| tag(:meta, property: key, content: value) }.join("\n").html_safe.presence
     end
 
     def sort_order
