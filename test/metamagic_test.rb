@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HelperMethodsTest < ActionView::TestCase
+class MetamagicTest < ActionView::TestCase
   include Metamagic::ViewHelper
 
   test "meta tags generation" do
@@ -31,30 +31,6 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic
   end
 
-  test "open graph" do
-    meta title: "Test Title",
-         og: {
-           image: {
-             url: "http://test.com/image.jpg",
-             type: "image/png"
-           }
-         }
-
-    assert_equal %{<title>Test Title</title>\n<meta content="http://test.com/image.jpg" property="og:image:url" />\n<meta content="image/png" property="og:image:type" />},
-                 metamagic
-  end
-
-  test "twitter cards" do
-    meta title: "Test Title",
-         twitter: {
-           card: :summary,
-           site: "@flickr"
-         }
-
-    assert_equal %{<title>Test Title</title>\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />},
-                 metamagic
-  end
-
   test "custom tags" do
     Metamagic::Renderer.register_tag_type :custom, ->(key, value) { tag(:custom_tag, one: key, two: value) }
 
@@ -80,45 +56,6 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic
   end
 
-  test "nil meta value" do
-    title "Test Title"
-    description nil
-
-    assert_equal %{<title>Test Title</title>},
-                 metamagic
-  end
-
-  test "array as meta value" do
-    keywords %w{one two three}
-
-    assert_equal %{<meta content="one, two, three" name="keywords" />},
-                 metamagic
-  end
-
-  test "empty array as meta value" do
-    title "Test Title"
-    keywords []
-
-    assert_equal %{<title>Test Title</title>},
-                 metamagic
-  end
-
-  test "nil in array as meta value" do
-    title "Test Title"
-    keywords ["one", nil, "two"]
-
-    assert_equal %{<title>Test Title</title>\n<meta content="one, two" name="keywords" />},
-                 metamagic
-  end
-
-  test "nil only array as meta value" do
-    title "Test Title"
-    keywords [nil]
-
-    assert_equal %{<title>Test Title</title>},
-                 metamagic
-  end
-
   test "property helper" do
     meta property: { one: "Property One", two: "Property Two", "og:image" => "http://test.com/image.png", nested: { a: "Nested A" } }
     property two: "Property Two second", three: "Property Three", nested: { a: "Nested A second", b: "Nested B" }
@@ -136,62 +73,6 @@ class HelperMethodsTest < ActionView::TestCase
     title "My Title"
 
     assert_equal %{<title>My Title</title>\n<meta content="one, two, three" name="keywords" />\n<meta content="My description." name="description" />\n<meta content="http://test.com/image.png" property="og:image" />\n<meta content="summary" property="twitter:card" />},
-                 metamagic
-  end
-
-  test "old property definition" do
-    assert_raises ArgumentError do
-      meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
-    end
-  end
-
-  test "nil title" do
-    title nil
-    description "Test description"
-
-    assert_equal %{<meta content="Test description" name="description" />},
-                 metamagic
-  end
-
-  test "property array" do
-    og image: ["one.jpg", "two.jpg"]
-
-    assert_equal %{<meta content="one.jpg" property="og:image" />\n<meta content="two.jpg" property="og:image" />},
-                 metamagic
-  end
-
-  test "nil property" do
-    og title: "Test Title",
-       image: nil
-
-    assert_equal %{<meta content="Test Title" property="og:title" />},
-                 metamagic
-  end
-
-  test "nil only property array" do
-    og title: "Test Title",
-       image: [nil]
-
-    assert_equal %{<meta content="Test Title" property="og:title" />},
-                 metamagic
-  end
-
-  test "nil in property array" do
-    og title: "Test Title",
-       image: ["one.jpg", nil, "two.jpg"]
-
-    assert_equal %{<meta content="Test Title" property="og:title" />\n<meta content="one.jpg" property="og:image" />\n<meta content="two.jpg" property="og:image" />},
-                 metamagic
-  end
-
-  test "empty property array" do
-    og image: "http://test.com/image.png",
-       book: {
-         author: ["Leif Davidsen", "Anders Mogensen"],
-         tag: []
-       }
-
-    assert_equal %{<meta content="http://test.com/image.png" property="og:image" />\n<meta content="Leif Davidsen" property="og:book:author" />\n<meta content="Anders Mogensen" property="og:book:author" />},
                  metamagic
   end
 end
