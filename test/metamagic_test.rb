@@ -80,6 +80,45 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic
   end
 
+  test "nil meta value" do
+    title "Test Title"
+    description nil
+
+    assert_equal %{<title>Test Title</title>},
+                 metamagic
+  end
+
+  test "array as meta value" do
+    keywords %w{one two three}
+
+    assert_equal %{<meta content="one, two, three" name="keywords" />},
+                 metamagic
+  end
+
+  test "empty array as meta value" do
+    title "Test Title"
+    keywords []
+
+    assert_equal %{<title>Test Title</title>},
+                 metamagic
+  end
+
+  test "nil in array as meta value" do
+    title "Test Title"
+    keywords ["one", nil, "two"]
+
+    assert_equal %{<title>Test Title</title>\n<meta content="one, two" name="keywords" />},
+                 metamagic
+  end
+
+  test "nil only array as meta value" do
+    title "Test Title"
+    keywords [nil]
+
+    assert_equal %{<title>Test Title</title>},
+                 metamagic
+  end
+
   test "property helper" do
     meta property: { one: "Property One", two: "Property Two", "og:image" => "http://test.com/image.png", nested: { a: "Nested A" } }
     property two: "Property Two second", three: "Property Three", nested: { a: "Nested A second", b: "Nested B" }
@@ -106,6 +145,14 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "nil title" do
+    title nil
+    description "Test description"
+
+    assert_equal %{<meta content="Test description" name="description" />},
+                 metamagic
+  end
+
   test "property array" do
     og image: ["one.jpg", "two.jpg"]
 
@@ -121,11 +168,19 @@ class HelperMethodsTest < ActionView::TestCase
                  metamagic
   end
 
-  test "nil in property array" do
+  test "nil only property array" do
     og title: "Test Title",
        image: [nil]
 
     assert_equal %{<meta content="Test Title" property="og:title" />},
+                 metamagic
+  end
+
+  test "nil in property array" do
+    og title: "Test Title",
+       image: ["one.jpg", nil, "two.jpg"]
+
+    assert_equal %{<meta content="Test Title" property="og:title" />\n<meta content="one.jpg" property="og:image" />\n<meta content="two.jpg" property="og:image" />},
                  metamagic
   end
 
