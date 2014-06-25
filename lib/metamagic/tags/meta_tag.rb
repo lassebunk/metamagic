@@ -1,7 +1,8 @@
 module Metamagic
   class MetaTag < Tag
     def to_html
-      tag(:meta, name: key, content: Array(value).join(", "))
+      return unless values = Array(value).compact.presence
+      tag(:meta, name: key, content: values.join(", "))
     end
 
     def sort_order
