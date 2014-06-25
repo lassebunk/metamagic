@@ -105,4 +105,11 @@ class HelperMethodsTest < ActionView::TestCase
       meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
     end
   end
+
+  test "property array" do
+    og image: ["one.jpg", "two.jpg"]
+
+    assert_equal %{<meta content="one.jpg" property="og:image" />\n<meta content="two.jpg" property="og:image" />},
+                 metamagic
+  end
 end
