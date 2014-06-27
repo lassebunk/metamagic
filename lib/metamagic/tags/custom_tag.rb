@@ -7,6 +7,10 @@ module Metamagic
       @render_proc = render_proc
     end
 
+    def remove_prefix?
+      false
+    end
+
     def to_html
       instance_exec key, value, &render_proc
     end

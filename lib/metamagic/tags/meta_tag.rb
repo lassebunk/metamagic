@@ -8,5 +8,9 @@ module Metamagic
     def sort_order
       2
     end
+
+    def remove_prefix?
+      false
+    end
   end
 end

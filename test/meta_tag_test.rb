@@ -3,6 +3,22 @@ require 'test_helper'
 class MetaTagTest < ActionView::TestCase
   include Metamagic::ViewHelper
 
+  test "meta tags" do
+    meta keywords: %w{one two three},
+         description: "My description"
+
+    assert_equal %{<meta content="one, two, three" name="keywords" />\n<meta content="My description" name="description" />},
+                 metamagic
+  end
+
+  test "shortcut helpers" do
+    keywords %w{one two three}
+    description "My description"
+
+    assert_equal %{<meta content="one, two, three" name="keywords" />\n<meta content="My description" name="description" />},
+                 metamagic
+  end
+
   test "nil meta value" do
     title "Test Title"
     description nil

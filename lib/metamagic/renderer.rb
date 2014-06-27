@@ -5,8 +5,10 @@ module Metamagic
       description: MetaTag,
       keywords:    MetaTag,
       property:    PropertyTag,
-      og:          PropertyTag,
-      twitter:     PropertyTag
+      rel:         LinkTag,
+      canonical:   LinkTag,
+      og:          OpenGraphTag,
+      twitter:     TwitterTag
     }
 
     class << self

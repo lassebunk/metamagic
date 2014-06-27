@@ -4,6 +4,7 @@ module Metamagic
 
     def initialize(context, key, value)
       @context, @key, @value = context, key, value
+      @key = @key.gsub /^[^:]+:/, "" if remove_prefix?
     end
 
     def to_html
@@ -12,6 +13,10 @@ module Metamagic
 
     def sort_order
       1000
+    end
+
+    def remove_prefix?
+      true
     end
 
     def ==(other)

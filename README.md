@@ -114,6 +114,67 @@ This will generate the following:
 </head>
 ```
 
+### Adding relation links
+
+You can add `<link rel="xx" href="xx">` tags like this:
+
+```erb
+<%
+meta rel: {
+  author: "http://test.com/author.html",
+  publisher: "http://test.com/publisher.html"
+}
+%>
+```
+
+Or using the `rel` shortcut helper:
+
+```erb
+<%
+rel author: "http://test.com/author.html",
+    publisher: "http://test.com/publisher.html"
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  ...
+  <link href="http://test.com/author.html" rel="author" />
+  <link href="http://test.com/publisher.html" rel="publisher" />
+  ...
+</head>
+```
+
+### Canonical links
+
+For easy setting canonical links, you can use the following:
+
+```erb
+<%
+meta canonical: "http://test.com/page.html"
+%>
+```
+
+Or using the shortcut helper:
+
+```erb
+<%
+canonical "http://test.com/page.html"
+%>
+```
+
+This will generate the following:
+
+```html
+<head>
+  ...
+  <link href="http://test.com/page.html" rel="canonical" />
+  ...
+</head>
+```
+
 ### Custom properties
 
 #### OpenGraph (Facebook)

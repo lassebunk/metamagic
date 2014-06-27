@@ -3,6 +3,14 @@ require 'test_helper'
 class PropertyTagTest < ActionView::TestCase
   include Metamagic::ViewHelper
 
+  test "property tags" do
+    meta property: { one: "Property One", two: "Property Two", "og:image" => "http://test.com/image.png", nested: { a: "Nested A" } }
+    property two: "Property Two second", three: "Property Three", nested: { a: "Nested A second", b: "Nested B" }
+
+    assert_equal %{<meta content="Property One" property="one" />\n<meta content="Property Two" property="two" />\n<meta content="http://test.com/image.png" property="og:image" />\n<meta content="Nested A" property="nested:a" />\n<meta content="Property Three" property="three" />\n<meta content="Nested B" property="nested:b" />},
+                 metamagic
+  end
+
   test "property array" do
     og image: ["one.jpg", "two.jpg"]
 
