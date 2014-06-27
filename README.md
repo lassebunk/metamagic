@@ -147,34 +147,6 @@ This will generate the following:
 </head>
 ```
 
-### Canonical links
-
-For easy setting canonical links, you can use the following:
-
-```erb
-<%
-meta canonical: "http://test.com/page.html"
-%>
-```
-
-Or using the shortcut helper:
-
-```erb
-<%
-canonical "http://test.com/page.html"
-%>
-```
-
-This will generate the following:
-
-```html
-<head>
-  ...
-  <link href="http://test.com/page.html" rel="canonical" />
-  ...
-</head>
-```
-
 ### Custom properties
 
 #### OpenGraph (Facebook)
