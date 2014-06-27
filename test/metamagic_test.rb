@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HelperMethodsTest < ActionView::TestCase
+class MetamagicTest < ActionView::TestCase
   include Metamagic::ViewHelper
 
   test "meta tags generation" do
@@ -28,30 +28,6 @@ class HelperMethodsTest < ActionView::TestCase
          description: "Second description."
 
     assert_equal %{<title>Test Title</title>\n<meta content="Test description." name="description" />},
-                 metamagic
-  end
-
-  test "open graph" do
-    meta title: "Test Title",
-         og: {
-           image: {
-             url: "http://test.com/image.jpg",
-             type: "image/png"
-           }
-         }
-
-    assert_equal %{<title>Test Title</title>\n<meta content="http://test.com/image.jpg" property="og:image:url" />\n<meta content="image/png" property="og:image:type" />},
-                 metamagic
-  end
-
-  test "twitter cards" do
-    meta title: "Test Title",
-         twitter: {
-           card: :summary,
-           site: "@flickr"
-         }
-
-    assert_equal %{<title>Test Title</title>\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />},
                  metamagic
   end
 
@@ -98,11 +74,5 @@ class HelperMethodsTest < ActionView::TestCase
 
     assert_equal %{<title>My Title</title>\n<meta content="one, two, three" name="keywords" />\n<meta content="My description." name="description" />\n<meta content="http://test.com/image.png" property="og:image" />\n<meta content="summary" property="twitter:card" />},
                  metamagic
-  end
-
-  test "old property definition" do
-    assert_raises ArgumentError do
-      meta [:property => "og:image", :content => "http://mydomain.com/images/my_image.jpg"]
-    end
   end
 end
