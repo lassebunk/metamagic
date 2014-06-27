@@ -6,7 +6,6 @@ module Metamagic
       keywords:    MetaTag,
       property:    PropertyTag,
       rel:         LinkTag,
-      canonical:   LinkTag,
       og:          OpenGraphTag,
       twitter:     TwitterTag
     }
