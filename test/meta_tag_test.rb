@@ -65,6 +65,11 @@ class MetaTagTest < ActionView::TestCase
                  metamagic(keywords: [:keywords, "default", "from", "layout"])
   end
 
+  test "keywords template with no keywords" do
+    assert_equal %{<meta content="default, from, layout" name="keywords" />},
+                 metamagic(keywords: [:keywords, "default", "from", "layout"])
+  end
+
   test "unique values using templates" do
     keywords %w{added keywords}
 
