@@ -12,7 +12,7 @@ module Metamagic
       end
 
       # Loop through special options
-      hash.slice(:site).each do |key, value|
+      hash.slice(:site, :separator).each do |key, value|
         metamagic_renderer.send("#{key}=", value)
         hash.delete key
       end

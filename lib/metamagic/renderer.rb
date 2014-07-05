@@ -10,6 +10,8 @@ module Metamagic
       twitter:     TwitterTag
     }
 
+    DEFAULT_SEPARATOR = " - "
+
     class << self
       def tag_types
         @tag_types ||= DEFAULT_TAG_TYPES.dup
@@ -41,15 +43,16 @@ module Metamagic
       transform_hash(hash).each do |key, value|
         if enable_templates && is_template?(value)
           add_template key, value
-        else
-          klass = self.class.tag_type_for_key(key)
-          tag = if klass.is_a?(Proc)
-            CustomTag.new(self, key, value, klass)
-          else
-            klass.new(self, key, value)
-          end
-          tags << tag unless tags.include?(tag)
+          value = nil
         end
+
+        klass = self.class.tag_type_for_key(key)
+        tag = if klass.is_a?(Proc)
+          CustomTag.new(self, key, value, klass)
+        else
+          klass.new(self, key, value)
+        end
+        tags << tag unless tags.include?(tag)
       end
     end
 
@@ -80,6 +83,12 @@ module Metamagic
     end
 
     attr_writer :site
+
+    def separator
+      @separator ||= DEFAULT_SEPARATOR
+    end
+
+    attr_writer :separator
 
     def render
       tags.sort.map(&:to_html).compact.join("\n").html_safe

@@ -32,6 +32,30 @@ class TitleTagTest < ActionView::TestCase
                  metamagic(site: "My Site", title: ":title - :site")
   end
 
+  test "title template with no title set" do
+    assert_equal %{<title> - My Site</title>},
+                 metamagic(site: "My Site", title: ":title - :site")
+  end
+
+  test "title separator" do
+    title "Test Title"
+
+    assert_equal %{<title>Test Title - My Site</title>},
+                 metamagic(site: "My Site", title: [:title, :site])
+  end
+
+  test "custom title separator" do
+    title "Test Title"
+
+    assert_equal %{<title>Test Title | My Site</title>},
+                 metamagic(site: "My Site", separator: " | ", title: [:title, :site])
+  end
+
+  test "title separator with no title" do
+    assert_equal %{<title>My Site</title>},
+                 metamagic(site: "My Site", title: [:title, :site])
+  end
+
   test "title template with nil site" do
     title "Test Title"
 

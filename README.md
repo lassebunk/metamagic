@@ -81,7 +81,7 @@ In your layout:
 
 ```erb
 <%
-metamagic site: "My Site", title: ":title — :site"
+metamagic site: "My Site", title: [:title, :site], separator: " — "
 %>
 ```
 
@@ -93,6 +93,10 @@ This will render the following:
   ...
 </head>
 ```
+
+The default separator is ` - `.
+
+If you hadn't set the title in your view, it would just display the site name.
 
 You can also use a proc to enable custom processing:
 

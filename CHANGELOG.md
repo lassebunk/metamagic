@@ -3,6 +3,7 @@
 ## Version 3.1.1
 
 * Adds support for specifying templates on all tag types.
+* Add `:separator` option for building meta titles.
 
 ## Version 3.1.0
 
