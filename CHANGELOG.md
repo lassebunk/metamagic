@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.3
+
+# Shortcut helpers now return the value you send to them.
+
 ## Version 3.1.2
 
 * Add HTML safety handling.
