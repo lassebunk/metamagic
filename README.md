@@ -108,6 +108,24 @@ metamagic site: "My Site", title: -> { title.include?(site) ? title : "#{title} 
 
 This will insert the site name only if it is not already present in the title.
 
+You could also do this with a view helper:
+
+```ruby
+module ApplicationHelper
+  def meta_title_for(title, site)
+    title.include?(site) ? title : "#{title} — #{site}"
+  end
+end
+```
+
+```erb
+<%
+metamagic site: "My Site", title: -> { meta_title_for(title, site) }
+%>
+```
+
+The proc is still needed here to ensure the right context for the template.
+
 #### Keywords template
 
 Keyword templates can be used to add some default keywords to all pages on your site.

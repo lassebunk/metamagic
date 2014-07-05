@@ -2,6 +2,7 @@ require 'test_helper'
 
 class TitleTagTest < ActionView::TestCase
   include Metamagic::ViewHelper
+  include ApplicationHelper
 
   test "title tag" do
     meta title: "My Title"
@@ -69,6 +70,13 @@ class TitleTagTest < ActionView::TestCase
 
     assert_equal %{<title>Site: My Site - Title: Test Title</title>},
                  metamagic(site: "My Site", title: -> { "Site: #{site} - Title: #{title}" })
+  end
+
+  test "title template from view helper" do
+    title "Test Title"
+
+    assert_equal %{<title>From view helper: Test Title - My Site</title>},
+                 metamagic(site: "My Site", title: -> { meta_title_for(site, title) })
   end
 
   test "deprecated title_template option" do
