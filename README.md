@@ -184,6 +184,14 @@ This will generate the following:
 </head>
 ```
 
+Shortcut helpers return the value you send to them, so you can dry up your code by setting the title once in e.g. a `<h1>` tag, like this:
+
+```erb
+<h1><%= title "My Title" %></h1>
+```
+
+This is the same as setting the title at the top of your view.
+
 **Note:** Shortcut helpers will never override methods already present in the view context, so for example if you have a method named `title`, this will not be overridden.
 
 ### Specifying default meta tag values

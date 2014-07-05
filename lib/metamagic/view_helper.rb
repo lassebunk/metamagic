@@ -23,7 +23,9 @@ module Metamagic
 
     def method_missing(method, *args, &block)
       if metamagic_renderer.has_tag_type?(method)
-        meta method => args.first
+        args.first.tap do |value|
+          meta method => value
+        end
       else
         super
       end

@@ -51,6 +51,12 @@ class MetamagicTest < ActionView::TestCase
                  metamagic
   end
 
+  test "shortcut helper returns value" do
+    assert_equal "My Title", title("My Title")
+    assert_equal "My Description", description("My Description")
+    assert_equal %w{one two three}, keywords(%w{one two three})
+  end
+
   test "not adding templates from views" do
     title "This is a :nonexistent_key"
 
