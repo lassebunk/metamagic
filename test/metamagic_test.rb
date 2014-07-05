@@ -51,6 +51,13 @@ class MetamagicTest < ActionView::TestCase
                  metamagic
   end
 
+  test "not adding templates from views" do
+    title "This is a :nonexistent_key"
+
+    assert_equal %{<title>This is a :nonexistent_key</title>},
+                 metamagic
+  end
+
   test "sorting tags" do
     twitter card: :summary
     og image: "http://test.com/image.png"
