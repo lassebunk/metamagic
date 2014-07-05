@@ -5,13 +5,19 @@ module Metamagic
     end
 
     def metamagic(hash = {})
+      if title_template = hash.delete(:title_template)
+        # Deprecation warning
+        Rails.logger.warn "[Metamagic] Using `metamagic title_template: #{title_template.inspect}` has been deprecated. Please use `metamagic title: #{title_template.inspect}` instead."
+        hash[:title] = title_template
+      end
+
       # Loop through special options
-      hash.slice(:title_template, :site).each do |key, value|
+      hash.slice(:site).each do |key, value|
         metamagic_renderer.send("#{key}=", value)
         hash.delete key
       end
 
-      metamagic_renderer.add hash
+      metamagic_renderer.add hash, true
       metamagic_renderer.render
     end
 

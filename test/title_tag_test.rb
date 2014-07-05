@@ -28,27 +28,29 @@ class TitleTagTest < ActionView::TestCase
   test "title template" do
     title "Test Title"
 
-    assert_equal %{<title>Test Title — My Site</title>},
-                 metamagic(site: "My Site", title_template: ":title — :site")
-  end
-
-  test "title template with default title" do
-    assert_equal %{<title>Test Title — My Site</title>},
-                 metamagic(site: "My Site", title: "Test Title", title_template: ":title — :site")
+    assert_equal %{<title>Test Title - My Site</title>},
+                 metamagic(site: "My Site", title: ":title - :site")
   end
 
   test "title template with nil site" do
     title "Test Title"
 
     assert_raises RuntimeError do
-      metamagic(title_template: ":title — :site")
+      metamagic(title: ":title - :site")
     end
   end
 
   test "title template proc" do
     title "Test Title"
 
-    assert_equal %{<title>Site: My Site — Title: Test Title</title>},
-                 metamagic(site: "My Site", title_template: -> { "Site: #{site} — Title: #{title}" })
+    assert_equal %{<title>Site: My Site - Title: Test Title</title>},
+                 metamagic(site: "My Site", title: -> { "Site: #{site} - Title: #{title}" })
+  end
+
+  test "deprecated title_template option" do
+    title "Test Title"
+
+    assert_equal %{<title>Test Title - My Site</title>},
+                 metamagic(site: "My Site", title_template: ":title - :site")
   end
 end

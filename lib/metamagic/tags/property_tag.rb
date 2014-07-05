@@ -1,7 +1,7 @@
 module Metamagic
   class PropertyTag < Tag
     def to_html
-      Array(value).compact.map { |value| tag(:meta, property: key, content: value) }.join("\n").html_safe.presence
+      interpolated_values.map { |value| tag(:meta, property: key, content: value) }.join("\n").html_safe.presence
     end
 
     def sort_order

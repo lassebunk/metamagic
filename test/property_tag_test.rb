@@ -52,4 +52,11 @@ class PropertyTagTest < ActionView::TestCase
     assert_equal %{<meta content="http://test.com/image.png" property="og:image" />\n<meta content="Leif Davidsen" property="og:book:author" />\n<meta content="Anders Mogensen" property="og:book:author" />},
                  metamagic
   end
+
+  test "property template" do
+    og image: "http://test.com/image.jpg"
+
+    assert_equal %{<meta content="http://test.com/image.jpg" property="og:image" />\n<meta content="http://test.com/image2.jpg" property="og:image" />},
+                 metamagic(og: { image: [:og_image, "http://test.com/image2.jpg"] })
+  end
 end

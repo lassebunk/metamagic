@@ -19,6 +19,27 @@ module Metamagic
       true
     end
 
+    def template
+      @template ||= template_for(key) || :value
+    end
+
+    def interpolated_values
+      @interpolated_values ||= Array(template).map do |template|
+        case template
+        when Proc
+          instance_exec(&template)
+        when Symbol
+          send(template)
+        when String
+          template.gsub(/:\w+/) do |key|
+            send(key[1..-1])
+          end
+        else
+          raise "Unknown template type #{template.class}."
+        end
+      end.flatten.compact.uniq
+    end
+
     def ==(other)
       self.class == other.class && self.key == other.key
     end
@@ -27,8 +48,9 @@ module Metamagic
       [sort_order, self.class.name] <=> [other.sort_order, other.class.name]
     end
 
-    def method_missing(*args)
-      context.send(*args)
+    def method_missing(method, *args, &block)
+      return value if method.to_s == key.gsub(":", "_") # When calling e.g. `og_image`. Used for interpolating values.
+      context.send(method, *args, &block)
     end
   end
 end

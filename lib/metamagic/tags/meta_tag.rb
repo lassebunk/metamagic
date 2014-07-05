@@ -1,8 +1,8 @@
 module Metamagic
   class MetaTag < Tag
     def to_html
-      return unless values = Array(value).compact.presence
-      tag(:meta, name: key, content: values.join(", "))
+      return if interpolated_values.empty?
+      tag(:meta, name: key, content: interpolated_values.join(", "))
     end
 
     def sort_order

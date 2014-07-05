@@ -1,7 +1,7 @@
 module Metamagic
   class LinkTag < Tag
     def to_html
-      tag(:link, rel: key, href: value)
+      interpolated_values.map { |value| tag(:link, rel: key, href: value) }.join("\n").html_safe.presence
     end
   end
 end

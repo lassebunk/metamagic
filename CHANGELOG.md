@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.1
+
+* Adds support for specifying templates on all tag types.
+
 ## Version 3.1.0
 
 * Adds title templates.

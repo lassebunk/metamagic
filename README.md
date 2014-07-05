@@ -56,7 +56,16 @@ This will generate the following:
 </head>
 ```
 
-### Using title templates
+### Using templates
+
+Templates can be used to insert meta values from your views into your layouts.
+This is usable for example if you want to add something to your title on all
+pages, or have some default keywords added to all pages. Templates work with
+all tag types, including OpenGraph, Twitter, and others.
+
+See below for examples on using templates.
+
+#### Title templates
 
 Title templates can be used to automatically insert the name of your site into the meta title.
 
@@ -72,7 +81,7 @@ In your layout:
 
 ```erb
 <%
-metamagic site: "My Site", title_template: ":title — :site"
+metamagic site: "My Site", title: ":title — :site"
 %>
 ```
 
@@ -89,11 +98,46 @@ You can also use a proc to enable custom processing:
 
 ```erb
 <%
-metamagic site: "My Site", title_template: -> { title.include?(site) ? title : "#{title} — #{site}" }
+metamagic site: "My Site", title: -> { title.include?(site) ? title : "#{title} — #{site}" }
 %>
 ```
 
 This will insert the site name only if it is not already present in the title.
+
+#### Keywords template
+
+Keyword templates can be used to add some default keywords to all pages on your site.
+
+In your template:
+
+```erb
+<%
+meta keywords: %{one two three}
+%>
+```
+
+In your layout:
+
+```erb
+<%
+metamagic keywords: [:keywords, "four", "five", "six"]
+%>
+```
+
+This will render the following:
+
+```html
+<head>
+  <meta content="one, two, three, four, five, six" name="keywords" />
+  ...
+</head>
+```
+
+#### Adding templates for other tag types
+
+Templates are supported on all tag types. You can access the values set in the
+view by replacing colons (`:`) in your meta keys with underscores (`_`), so for
+example `og:image` can be accessed with `og_image`.
 
 ### Shortcut helpers
 

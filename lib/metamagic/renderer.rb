@@ -35,18 +35,34 @@ module Metamagic
       @tags ||= []
     end
 
-    def add(hash = {})
+    def add(hash = {}, enable_templates = false)
       raise ArgumentError, "Defining meta properties via arrays has been removed in Metamagic v3.0 and replaced by some pretty helpers. Please see the readme at https://github.com/lassebunk/metamagic for more info." if hash.is_a?(Array)
 
-      transform_hash(hash).each do |k, v|
-        klass = self.class.tag_type_for_key(k)
-        tag = if klass.is_a?(Proc)
-          CustomTag.new(self, k, v, klass)
+      transform_hash(hash).each do |key, value|
+        if enable_templates && is_template?(value)
+          add_template key, value
         else
-          klass.new(self, k, v)
+          klass = self.class.tag_type_for_key(key)
+          tag = if klass.is_a?(Proc)
+            CustomTag.new(self, key, value, klass)
+          else
+            klass.new(self, key, value)
+          end
+          tags << tag unless tags.include?(tag)
         end
-        tags << tag unless tags.include?(tag)
       end
+    end
+
+    def templates
+      @templates ||= {}
+    end
+
+    def add_template(key, value)
+      templates[key] = value
+    end
+
+    def template_for(key)
+      templates[key]
     end
 
     def has_tag_type?(prefix)
@@ -74,6 +90,14 @@ module Metamagic
     end
 
     private
+
+    def is_template?(value)
+      Array(value).any? do |val|
+        val.is_a?(Proc) ||
+        val.is_a?(Symbol) ||
+        val =~ /:\w+/
+      end
+    end
 
     # Transforms a nested hash into meta property keys.
     def transform_hash(hash, path = "")

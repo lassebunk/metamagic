@@ -12,7 +12,7 @@ module Metamagic
     end
 
     def to_html
-      instance_exec key, value, &render_proc
+      instance_exec key, interpolated_values, &render_proc
     end
   end
 end
