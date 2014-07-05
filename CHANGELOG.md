@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 3.1.0
+
+* Adds title templates.
+
+## Version 3.0.3
+
+* Minor fix.
+
+## Version 3.0.2
+
+* Add relation links.
+
+## Version 3.0.1
+
+* Handle nil meta values.
+
 ## Version 3.0.0
 
 * Rewritten to simplify Open Graph (Facebook), Twitter Cards, and custom tags.

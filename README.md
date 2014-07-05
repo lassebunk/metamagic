@@ -56,6 +56,45 @@ This will generate the following:
 </head>
 ```
 
+### Adding a title template
+
+Title templates can be used to automatically insert the name of your site into the meta title.
+
+In your template:
+
+```erb
+<%
+meta title: "My Title"
+%>
+```
+
+In your layout:
+
+```erb
+<%
+metamagic site: "My Site", title_template: ":title — :site"
+%>
+```
+
+This will render the following:
+
+```html
+<head>
+  <title>My Title — My Site</title>
+  ...
+</head>
+```
+
+You can also use a proc to enable custom processing:
+
+```erb
+<%
+metamagic site: "My Site", title_template: -> { title.include?(site) ? title : "#{title} — #{site}" }
+%>
+```
+
+This will insert the site name only if it is not already present in the title.
+
 ### Shortcut helpers
 
 For easy setting of meta tags, you can use the shortcut helpers like this:

@@ -3,7 +3,7 @@ module Metamagic
     attr_reader :context, :key, :value
 
     def initialize(context, key, value)
-      @context, @key, @value = context, key, value
+      @context, @key, @value = context, key.to_s, value
       @key = @key.gsub /^[^:]+:/, "" if remove_prefix?
     end
 

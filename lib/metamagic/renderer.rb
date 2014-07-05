@@ -53,6 +53,18 @@ module Metamagic
       self.class.tag_types.has_key?(prefix)
     end
 
+    def title_template
+      @title_template ||= ":title"
+    end
+
+    attr_writer :title_template
+
+    def site
+      @site or raise "Metamagic site not set. Please use `metamagic site: 'My Site'` to set it."
+    end
+
+    attr_writer :site
+
     def render
       tags.sort.map(&:to_html).compact.join("\n").html_safe
     end

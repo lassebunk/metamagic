@@ -5,6 +5,12 @@ module Metamagic
     end
 
     def metamagic(hash = {})
+      # Loop through special options
+      hash.slice(:title_template, :site).each do |key, value|
+        metamagic_renderer.send("#{key}=", value)
+        hash.delete key
+      end
+
       metamagic_renderer.add hash
       metamagic_renderer.render
     end
