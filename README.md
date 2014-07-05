@@ -56,7 +56,7 @@ This will generate the following:
 </head>
 ```
 
-### Adding a title template
+### Using title templates
 
 Title templates can be used to automatically insert the name of your site into the meta title.
 
