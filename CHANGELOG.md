@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.2
+
+* Add HTML safety handling.
+
 ## Version 3.1.1
 
 * Adds support for specifying templates on all tag types.

@@ -31,13 +31,13 @@ module Metamagic
         when Symbol
           send(template)
         when String
-          template.gsub(/:\w+/) do |key|
-            send(key[1..-1])
-          end
+          ERB::Util.html_escape(template).gsub(/:\w+/) do |key|
+            ERB::Util.html_escape(send(key[1..-1]))
+          end.html_safe
         else
           raise "Unknown template type #{template.class}."
         end
-      end.flatten.compact.uniq
+      end.flatten.compact.uniq.map { |value| ERB::Util.html_escape(value) }
     end
 
     def ==(other)

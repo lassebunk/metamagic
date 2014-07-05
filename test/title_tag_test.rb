@@ -79,6 +79,48 @@ class TitleTagTest < ActionView::TestCase
                  metamagic(site: "My Site", title: -> { meta_title_for(site, title) })
   end
 
+  test "html safe titles" do
+    title "My Site &rarr; Test".html_safe
+
+    assert_equal %{<title>My Site &rarr; Test</title>},
+                 metamagic
+  end
+
+  test "html safe titles in template" do
+    title "Test &rarr; Test".html_safe
+
+    assert_equal %{<title>Test &rarr; Test - My Site</title>},
+                 metamagic(title: ":title - :site", site: "My Site")
+  end
+
+  test "html unsafe titles" do
+    title "My Site &rarr; Test"
+
+    assert_equal %{<title>My Site &amp;rarr; Test</title>},
+                 metamagic
+  end
+
+  test "html unsafe titles in template" do
+    title "Test &rarr; Test"
+
+    assert_equal %{<title>Test &amp;rarr; Test - My Site</title>},
+                 metamagic(title: ":title - :site", site: "My Site")
+  end
+
+  test "html safe title template" do
+    title "Test Title"
+
+    assert_equal %{<title>Test Title &rarr; My Site</title>},
+                 metamagic(title: ":title &rarr; :site".html_safe, site: "My Site")
+  end
+
+  test "html unsafe title template" do
+    title "Test Title"
+
+    assert_equal %{<title>Test Title &amp;rarr; My Site</title>},
+                 metamagic(title: ":title &rarr; :site", site: "My Site")
+  end
+
   test "deprecated title_template option" do
     title "Test Title"
 

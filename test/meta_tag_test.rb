@@ -76,4 +76,18 @@ class MetaTagTest < ActionView::TestCase
     assert_equal %{<meta content="added, keywords, default, from, layout" name="keywords" />},
                  metamagic(keywords: [:keywords, "added", "default", "keywords", "from", "layout"])
   end
+
+  test "html safe keywords" do
+    keywords ["one", "two &rarr; test".html_safe, "three"]
+
+    assert_equal %{<meta content="one, two &rarr; test, three" name="keywords" />},
+                 metamagic
+  end
+
+  test "html unsafe keywords" do
+    keywords ["one", "two &rarr; test", "three"]
+
+    assert_equal %{<meta content="one, two &amp;rarr; test, three" name="keywords" />},
+                 metamagic
+  end
 end
