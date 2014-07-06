@@ -108,23 +108,24 @@ metamagic site: "My Site", title: -> { title.include?(site) ? title : "#{title} 
 
 This will insert the site name only if it is not already present in the title.
 
-You could also do this with a view helper:
+You could also do this with a view helper. I use this in one of my websites:
 
 ```ruby
 module ApplicationHelper
   def meta_title_for(title, site)
+    return site if title.blank?
     title.include?(site) ? title : "#{title} — #{site}"
   end
 end
 ```
+
+The proc is still needed in the layout to ensure the right context for the template:
 
 ```erb
 <%
 metamagic site: "My Site", title: -> { meta_title_for(title, site) }
 %>
 ```
-
-The proc is still needed here to ensure the right context for the template.
 
 #### Keywords template
 
