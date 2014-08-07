@@ -104,7 +104,7 @@ module Metamagic
       Array(value).any? do |val|
         val.is_a?(Proc) ||
         val.is_a?(Symbol) ||
-        val =~ /:\w+/
+        val =~ /\A:\w+/
       end
     end
 

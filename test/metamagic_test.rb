@@ -20,6 +20,14 @@ class MetamagicTest < ActionView::TestCase
                  metamagic(title: "Default Title", description: "Default description", test: "Default test")
   end
 
+  test "default meta tags containing colons" do
+    meta title: "Test Title",
+         test: "Test tag"
+
+    assert_equal %{<title>Test Title</title>\n<meta content="Test tag" name="test" />\n<meta content="Default :description" name="description" />},
+                 metamagic(title: "Default:Title", description: "Default :description", test: "Default test")
+  end
+
   test "not adding existing meta tags" do
     meta title: "Test Title",
          description: "Test description."
