@@ -1,8 +1,12 @@
 # Changelog
 
+## Version 3.1.4
+
+* Fixes a bug where symbol-like strings inside meta tags would raise an exception
+
 ## Version 3.1.3
 
-# Shortcut helpers now return the value you send to them.
+* Shortcut helpers now return the value you send to them.
 
 ## Version 3.1.2
 
