@@ -2,7 +2,7 @@
 
 ## Version 3.1.4
 
-* Fixes a bug where symbol-like strings inside meta tags would raise an exception
+* Fixes a bug where symbol-like strings inside meta tags would raise an exception.
 
 ## Version 3.1.3
 
