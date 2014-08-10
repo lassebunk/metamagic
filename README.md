@@ -162,34 +162,6 @@ Templates are supported on all tag types. You can access the values set in the
 view by replacing colons (`:`) in your meta keys with underscores (`_`), so for
 example `og:image` can be accessed with `og_image`.
 
-### Duplicating tags
-
-Sometimes you want tags to be the same for e.g. Twitter and Facebook (OpenGraph).
-To circumvent the need to duplicate these tags every time you write them in your code, you can let Metamagic do this for you.
-
-Given that you want to add the same tags for Twitter as you have for Facebook, you can do this, in your view:
-
-```erb
-<%
-og title: "My Title",
-   image: "http://test.com/image.jpg",
-   description: "My description."
-%>
-```
-
-And in your layout:
-
-```erb
-<%= metamagic twitter: {
-                card: "summary",
-                title: :og_title,
-                image: :og_image,
-                description: :og_description 
-              }
-```
-
-Now you only need to set OpenGraph data and these will be copied to Twitter.
-
 ### Shortcut helpers
 
 For easy setting of meta tags, you can use the shortcut helpers like this:
