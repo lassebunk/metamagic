@@ -1,8 +1,12 @@
 # Changelog
 
+## Version 3.1.6
+
+* Revert changes from 3.1.5 because of regression errors.
+
 ## Version 3.1.5
 
-* Adds support for duplicating tags, e.g. setting `twitter:image` to the value of `og:image`.
+* Adds support for duplicating tags, e.g. setting `twitter:image` to the value of `og:image`. *(reverted in 3.1.6)*
 
 ## Version 3.1.4
 
