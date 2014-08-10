@@ -82,4 +82,12 @@ class MetamagicTest < ActionView::TestCase
     assert_equal %{<title>My Title</title>\n<meta content="one, two, three" name="keywords" />\n<meta content="My description." name="description" />\n<meta content="http://test.com/image.png" property="og:image" />\n<meta content="summary" property="twitter:card" />},
                  metamagic
   end
+
+  test "duplicating tags" do
+    og image: "http://test.com/image.png",
+       description: "My description."
+
+    assert_equal %{<meta content="http://test.com/image.png" property="og:image" />\n<meta content="http://test.com/default.png" property="og:image" />\n<meta content="My description." property="og:description" />\n<meta content="http://test.com/image.png" property="twitter:image" />\n<meta content="http://test.com/default.png" property="twitter:image" />\n<meta content="summary" property="twitter:card" />\n<meta content="My description." property="twitter:description" />},
+                 metamagic(og: { image: [:value, "http://test.com/default.png"] }, twitter: { card: "summary", image: :og_image, description: :og_description, other: :og_nonexisting })
+  end
 end

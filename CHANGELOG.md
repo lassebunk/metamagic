@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.5
+
+* Adds support for duplicating tags, e.g. setting `twitter:image` to the value of `og:image`.
+
 ## Version 3.1.4
 
 * Fixes a bug where symbol-like strings inside meta tags would raise an exception.

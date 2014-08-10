@@ -69,7 +69,7 @@ module Metamagic
     end
 
     def has_tag_type?(prefix)
-      self.class.tag_types.has_key?(prefix)
+      self.class.tag_types.has_key?(prefix.to_sym)
     end
 
     def title_template
@@ -94,8 +94,12 @@ module Metamagic
       tags.sort.map(&:to_html).compact.join("\n").html_safe
     end
 
-    def method_missing(*args)
-      context.send(*args)
+    def method_missing(method, *args, &block)
+      if method.to_s =~ /^([^_]+)/ && has_tag_type?($1) # Adds support for calling e.g. `og_image`
+        tags.find { |t| t.key == method.to_s.gsub("_", ":") }.try(:interpolated_values)
+      else
+        context.send(method, *args, &block)
+      end
     end
 
     private
