@@ -11,7 +11,7 @@ class TwitterTest < ActionView::TestCase
     twitter site: "@flickr"
 
 
-    assert_equal %{<title>Test Title</title>\n<meta content="summary" property="twitter:card" />\n<meta content="@flickr" property="twitter:site" />},
+    assert_equal_segment %{<title>Test Title</title>\n<meta content="summary" name="twitter:card" />\n<meta content="@flickr" name="twitter:site" />},
                  metamagic
   end
 end
