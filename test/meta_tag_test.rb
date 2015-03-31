@@ -7,7 +7,7 @@ class MetaTagTest < ActionView::TestCase
     meta keywords: %w{one two three},
          description: "My description"
 
-    assert_equal %{<meta content="one, two, three" name="keywords" />\n<meta content="My description" name="description" />},
+    assert_equal_segment %{<meta content="one, two, three" name="keywords" />\n<meta content="My description" name="description" />},
                  metamagic
   end
 
@@ -15,7 +15,7 @@ class MetaTagTest < ActionView::TestCase
     keywords %w{one two three}
     description "My description"
 
-    assert_equal %{<meta content="one, two, three" name="keywords" />\n<meta content="My description" name="description" />},
+    assert_equal_segment %{<meta content="one, two, three" name="keywords" />\n<meta content="My description" name="description" />},
                  metamagic
   end
 
@@ -23,14 +23,14 @@ class MetaTagTest < ActionView::TestCase
     title "Test Title"
     description nil
 
-    assert_equal %{<title>Test Title</title>},
+    assert_equal_segment %{<title>Test Title</title>},
                  metamagic
   end
 
   test "array as meta value" do
     keywords %w{one two three}
 
-    assert_equal %{<meta content="one, two, three" name="keywords" />},
+    assert_equal_segment %{<meta content="one, two, three" name="keywords" />},
                  metamagic
   end
 
@@ -38,7 +38,7 @@ class MetaTagTest < ActionView::TestCase
     title "Test Title"
     keywords []
 
-    assert_equal %{<title>Test Title</title>},
+    assert_equal_segment %{<title>Test Title</title>},
                  metamagic
   end
 
@@ -46,7 +46,7 @@ class MetaTagTest < ActionView::TestCase
     title "Test Title"
     keywords ["one", nil, "two"]
 
-    assert_equal %{<title>Test Title</title>\n<meta content="one, two" name="keywords" />},
+    assert_equal_segment %{<title>Test Title</title>\n<meta content="one, two" name="keywords" />},
                  metamagic
   end
 
@@ -54,40 +54,40 @@ class MetaTagTest < ActionView::TestCase
     title "Test Title"
     keywords [nil]
 
-    assert_equal %{<title>Test Title</title>},
+    assert_equal_segment %{<title>Test Title</title>},
                  metamagic
   end
 
   test "keywords template" do
     keywords %w{added keywords}
 
-    assert_equal %{<meta content="added, keywords, default, from, layout" name="keywords" />},
+    assert_equal_segment %{<meta content="added, keywords, default, from, layout" name="keywords" />},
                  metamagic(keywords: [:keywords, "default", "from", "layout"])
   end
 
   test "keywords template with no keywords" do
-    assert_equal %{<meta content="default, from, layout" name="keywords" />},
+    assert_equal_segment %{<meta content="default, from, layout" name="keywords" />},
                  metamagic(keywords: [:keywords, "default", "from", "layout"])
   end
 
   test "unique values using templates" do
     keywords %w{added keywords}
 
-    assert_equal %{<meta content="added, keywords, default, from, layout" name="keywords" />},
+    assert_equal_segment %{<meta content="added, keywords, default, from, layout" name="keywords" />},
                  metamagic(keywords: [:keywords, "added", "default", "keywords", "from", "layout"])
   end
 
   test "html safe keywords" do
     keywords ["one", "two &rarr; test".html_safe, "three"]
 
-    assert_equal %{<meta content="one, two &rarr; test, three" name="keywords" />},
+    assert_equal_segment %{<meta content="one, two &rarr; test, three" name="keywords" />},
                  metamagic
   end
 
   test "html unsafe keywords" do
     keywords ["one", "two &rarr; test", "three"]
 
-    assert_equal %{<meta content="one, two &amp;rarr; test, three" name="keywords" />},
+    assert_equal_segment %{<meta content="one, two &amp;rarr; test, three" name="keywords" />},
                  metamagic
   end
 end
