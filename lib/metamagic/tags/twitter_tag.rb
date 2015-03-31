@@ -1,7 +1,7 @@
 module Metamagic
-  class TwitterTag < PropertyTag
-    def remove_prefix?
-      false
+  class TwitterTag < MetaTag
+    def sort_order
+      3
     end
   end
 end
