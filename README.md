@@ -307,8 +307,8 @@ This will generate the following:
 ```html
 <head>
   ...
-  <meta content="summary" property="twitter:card" />
-  <meta content="@flickr" property="twitter:site" />
+  <meta content="summary" name="twitter:card" />
+  <meta content="@flickr" name="twitter:site" />
   ...
 </head>
 ```
