@@ -80,7 +80,7 @@ meta title: "My Title"
 In your layout:
 
 ```erb
-<%
+<%=
 metamagic site: "My Site", title: [:title, :site], separator: " — "
 %>
 ```
