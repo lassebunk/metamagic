@@ -37,7 +37,9 @@ module Metamagic
         else
           raise "Unknown template type #{template.class}."
         end
-      end.flatten.compact.uniq.map { |value| ERB::Util.html_escape(value) }
+      end.flatten.compact.uniq.map do |value|
+        Metamagic::Value.create_escaped(value)
+      end
     end
 
     def ==(other)

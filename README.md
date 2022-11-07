@@ -18,7 +18,7 @@ In your *Gemfile*:
 ```ruby
 gem 'metamagic'
 ```
-  
+
 Then run `bundle install`.
 
 Examples
@@ -217,7 +217,7 @@ For custom meta tags, you can use it like this:
 meta my_custom_name: "My custom value"
 %>
 ```
-  
+
 This will generate the following:
 
 ```html
@@ -402,6 +402,46 @@ When you register a new tag type, a shortcut helper is automatically defined. Th
 custom key_one: "My first key",
        key_two: "My second key"
 %>
+```
+
+### Adding data attributes to tags
+
+All tag types can add data attributes.
+
+```erb
+<%
+meta title: "My Title",
+     description: {
+       value: "content",
+       data: { "attr-name" => "data attr value" }
+     }
+%>
+```
+
+This will render the following:
+
+```html
+<title>My Title</title>
+<meta name="description" content="content" data-attr-name="data attr value" />
+```
+
+Multiple data attributes can be specified:
+
+```erb
+<%
+meta title: "My Title",
+     description: {
+       value: "content",
+       data: { "attr-name-1" => "one", "attr-name-2" => "two" }
+     }
+%>
+```
+
+This will render the following:
+
+```html
+<title>My Title</title>
+<meta name="description" content="content" data-attr-1="one" data-attr-2="two" />
 ```
 
 Requirements
