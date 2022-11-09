@@ -1,5 +1,6 @@
 %w{
   version
+  value
   tag
   tags/meta_tag
   tags/title_tag

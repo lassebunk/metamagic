@@ -12,7 +12,20 @@ module Metamagic
     end
 
     def to_html
-      instance_exec key, interpolated_values, &render_proc
+      if render_proc.arity == 2
+        instance_exec(
+          key,
+          interpolated_values.map(&:value),
+          &render_proc
+        )
+      else
+        instance_exec(
+          key,
+          interpolated_values.map(&:value),
+          interpolated_values.first.data,
+          &render_proc
+        )
+      end
     end
   end
 end

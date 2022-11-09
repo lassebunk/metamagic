@@ -113,7 +113,7 @@ module Metamagic
       hash.each_with_object({}) do |(k, v), ret|
         key = path + k.to_s
 
-        if v.is_a?(Hash)
+        if v.is_a?(Hash) && !v.key?(:value)
           ret.merge! transform_hash(v, "#{key}:")
         else
           ret[key] = v

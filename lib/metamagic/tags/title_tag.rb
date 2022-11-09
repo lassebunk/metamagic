@@ -1,7 +1,9 @@
 module Metamagic
   class TitleTag < Tag
     def to_html
-      content_tag(:title, interpolated_values.join(separator).html_safe) if interpolated_values.any?
+      values = interpolated_values.map(&:value).join(separator).html_safe
+
+      content_tag(:title, values) if values.length > 0
     end
 
     def sort_order
